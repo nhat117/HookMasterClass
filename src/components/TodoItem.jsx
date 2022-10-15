@@ -1,15 +1,17 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import {ThemeContext} from "../context/ThemeContext";
+import { TodoContext } from "../context/TodoContext";
 
-const TodoItem = (props) => {
+const TodoItem = ({todo}) => {
+  const todoContext = useContext(TodoContext);
+	const {deleteTodo} = todoContext;
 
-    const style = {
-		background: "rgb(240, 240, 240)",
-		color:'black'
-	}
+  const testContext = useContext(ThemeContext);
+	const {isLightTheme, light, dark} = testContext.theme;
+	const style = isLightTheme ? light : dark;
 
-    const todo = props.todo
   return (
-    <li style = {style}>{todo.title}</li>
+    <li onClick={deleteTodo.bind(this,todo.id)} style = {style}>{todo.title}</li>
   )
 }
 
